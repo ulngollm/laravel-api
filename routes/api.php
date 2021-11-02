@@ -18,3 +18,32 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/user', function () {
+    return ['name' => 'ully'];
+});
+Route::get('/user/{id}', function ($id) {
+    return array(
+        'id' => $id,
+        'name' => 'name'
+    );
+});
+Route::get('/group', function () {
+    return array(
+        array(
+            'id' => 1,
+            'name' => 'admin'
+        ),
+        array(
+            'id' => 2,
+            'name' => 'managers'
+        ),
+    );
+});
+
+Route::get('/group/{id}', function ($id) {
+    return
+        array(
+            'id' => $id,
+            'name' => 'admin'
+        );
+});
