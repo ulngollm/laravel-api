@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,32 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/user', function () {
-    return ['name' => 'ully'];
-});
-Route::get('/user/{id}', function ($id) {
-    return array(
-        'id' => $id,
-        'name' => 'name'
-    );
-});
-Route::get('/group', function () {
-    return array(
-        array(
-            'id' => 1,
-            'name' => 'admin'
-        ),
-        array(
-            'id' => 2,
-            'name' => 'managers'
-        ),
-    );
-});
 
-Route::get('/group/{id}', function ($id) {
-    return
-        array(
-            'id' => $id,
-            'name' => 'admin'
-        );
-});
+Route::get('/user', [OrderController::class, 'test']);
+
+Route::get('/user/{id}', [OrderController::class, 'getOne']);
+
+Route::get('/group', [GroupController::class, 'getAll']);
+
+Route::get('/group/{id}',  [GroupController::class, 'getOne']);
