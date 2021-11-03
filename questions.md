@@ -31,15 +31,27 @@
     Откат работает за счет выполнения метода down(). То есть процедуру отката нужно расписать самостоятельно в down(), это не как в гите работает.
 
 
+как выполнить базовые запросы к бд
+    через построитель запросов (PDO под капотом)  https://docs.rularavel.com/docs/8.x/queries
+
 заполнить таблицы тестовыми данными
     - создать seeder
     `php artisan make:seeder OrderSeeder`
     - расписать в методе run() заполнение данными
+    можно пользоваться построителем запросов или Eloquent
     - вызвать `php artisan db:seed --class=OrderSeeder`
     можно запустить сразу несколько seeder, прописав их в DatabaseSeeder
+
 
 ## Контроллеры
 что за синтаксис такой [UserController::class, 'index'], не понимаю его структуры. Ларавелевский или пхпшный?
 ```php
     Route::get('/user', [UserController::class, 'index']);
 ```
+
+
+## Возможные ошибки
+- не находит PDO
+Переустановить php
+sudo apt-get --purge remove php-common
+sudo apt-get install php-common php-mysql php-cli

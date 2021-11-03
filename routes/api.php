@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\GroupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\OrderController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,9 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/user', [OrderController::class, 'test']);
-
 Route::get('/user/{id}', [OrderController::class, 'getOne']);
 
 Route::get('/group', [GroupController::class, 'getAll']);
-
 Route::get('/group/{id}',  [GroupController::class, 'getOne']);
+
+Route::get('/order',  [OrderController::class, 'getAll']);
+Route::get('/order/{id}',  [OrderController::class, 'getOne']);

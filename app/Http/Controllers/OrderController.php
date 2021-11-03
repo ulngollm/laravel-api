@@ -3,34 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public static array $orders = array(
-        array(
-            'id' => 1,
-            'name' => 'Asf'
-        ),
-        array(
-            'id' => 2,
-            'name' => 'Manasdgsdaagers'
-        ),
-        array(
-            'id' => 3,
-            'name' => 'blabla'
-        ),
-    );
-
     public function getAll()
     {
-        return self::$orders;
+        $orders = DB::table('orders')->get()->toArray();
+        return $orders;
     }
 
     public function getOne(Request $request) {
         $id = $request->id;
-        $needle = array_filter(self::$orders, function($item) use ($id){
-            return $item['id'] == $id;
-        });
-        return current($needle);
+        $order =  DB::table('orders')->find($id);
+        return $order;
     }
 }
