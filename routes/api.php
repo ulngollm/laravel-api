@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupController;
@@ -28,3 +29,9 @@ Route::get('/group/{id}',  [GroupController::class, 'getOne']);
 
 Route::get('/order',  [OrderController::class, 'getAll']);
 Route::get('/order/{id}',  [OrderController::class, 'getOne']);
+
+
+Route::get('/category', [CategoryController::class, 'getAll']);
+Route::post('/category', [CategoryController::class, 'addOne']);
+Route::put('/category/{id}', [CategoryController::class, 'updateOne']);
+Route::delete('/category/{id}', [CategoryController::class, 'deleteOne']);
