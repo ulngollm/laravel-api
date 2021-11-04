@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GroupController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ListsController;
+use App\Http\Controllers\NotesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,17 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/user', [OrderController::class, 'test']);
-Route::get('/user/{id}', [OrderController::class, 'getOne']);
-
-Route::get('/group', [GroupController::class, 'getAll']);
-Route::get('/group/{id}',  [GroupController::class, 'getOne']);
-
-Route::get('/order',  [OrderController::class, 'getAll']);
-Route::get('/order/{id}',  [OrderController::class, 'getOne']);
+Route::get('/lists', [ListsController::class, 'getAll']);
+Route::post('/lists', [ListsController::class, 'addOne']);
+Route::get('/lists/{id}', [ListsController::class, 'getOne']);
+Route::put('/lists/{id}', [ListsController::class, 'updateById']);
+Route::delete('/lists/{id}', [ListsController::class, 'deleteById']);
 
 
-Route::get('/category', [CategoryController::class, 'getAll']);
-Route::post('/category', [CategoryController::class, 'addOne']);
-Route::put('/category/{id}', [CategoryController::class, 'updateOne']);
-Route::delete('/category/{id}', [CategoryController::class, 'deleteOne']);
+Route::get('/notes', [NotesController::class, 'getAll']);
+Route::post('/notes', [NotesController::class, 'addOne']);
+Route::get('/notes/{id}', [NotesController::class, 'getOne']);
+Route::put('/notes/{id}', [NotesController::class, 'updateById']);
+Route::delete('/notes/{id}', [NotesController::class, 'deleteById']);
+

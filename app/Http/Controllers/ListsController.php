@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CategoryController extends Controller
+class ListsController extends Controller
 {
-    static string $tableName = 'category';
+    static string $tableName = 'lists';
 
     public function getAll()
     {
@@ -18,21 +18,24 @@ class CategoryController extends Controller
     public function addOne(Request $request)
     {
         DB::table(self::$tableName)->insert([
-            'name'=>$request->name
+            'name' => $request->name,
+            'type' => $request->type
         ]);
         return response('OK');
-
     }
 
-    public function updateOne(Request $request)
+    public function updateById(Request $request)
     {
         DB::table(self::$tableName)
-            ->where('id', $request['id'])
-            ->update(['name'=>$request['name']]);
+            ->where('id', $request->id)
+            ->update([
+                'name' => $request->name,
+                'type' => $request->type
+            ]);
         return response('OK');
     }
 
-    public function deleteOne(Request $request)
+    public function deleteById(Request $request)
     {
         DB::table(self::$tableName)->where('id', $request->id)->delete();
         return response('OK');
