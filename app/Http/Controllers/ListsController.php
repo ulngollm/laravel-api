@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NoteList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,33 +12,43 @@ class ListsController extends Controller
 
     public function getAll()
     {
-        $categories = DB::table(self::$tableName)->get()->toArray();
-        return $categories;
+        $lists = NoteList::all();
+        return $lists;
+    }
+
+    public function getOne(Request $request)
+    {
+        $list = NoteList::find($request->id);
+        return $list;
     }
 
     public function addOne(Request $request)
     {
-        DB::table(self::$tableName)->insert([
-            'name' => $request->name,
-            'type' => $request->type
-        ]);
+        //TODO request validation
+        //todo проверить, есть ли уже такой список
+        //https://docs.rularavel.com/docs/8.x/eloquent#retrieving-or-creating-models
+        $list = new NoteList();
+        $list->name = $request->name;
+        $list->type = $request->type;
+        $list->save();
+
         return response('OK');
     }
 
     public function updateById(Request $request)
     {
-        DB::table(self::$tableName)
-            ->where('id', $request->id)
-            ->update([
-                'name' => $request->name,
-                'type' => $request->type
-            ]);
+
+        $list = NoteList::find($request->id);
+        $list->name = $request->name;
+        $list->type = $request->type;
+        $list->save();
         return response('OK');
     }
 
     public function deleteById(Request $request)
     {
-        DB::table(self::$tableName)->where('id', $request->id)->delete();
+        $list = NoteList::find($request->id);
+        $list->delete();
         return response('OK');
     }
 }
