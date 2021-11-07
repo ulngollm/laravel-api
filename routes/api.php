@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListsController;
 use App\Http\Controllers\NotesController;
+use App\Http\Controllers\TestController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,3 +35,6 @@ Route::get('/notes/{id}', [NotesController::class, 'getOne']);
 Route::put('/notes/{id}', [NotesController::class, 'updateById']);
 Route::delete('/notes/{id}', [NotesController::class, 'deleteById']);
 
+Route::get('/test', [TestController::class, 'getAll']);
+Route::post('/test', [TestController::class, 'addOne']);
+Route::get('/test/test', [TestController::class, 'test']);
