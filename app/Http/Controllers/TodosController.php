@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class TodosController extends Controller
 {
-    static string $tableName = 'todos';
 
     public function getAll()
     {
         return Todo::all();
+    }
+
+    public function getOne(Request $request)
+    {
+        return Todo::find($request->id);
     }
 
     public function addOne(Request $request)
@@ -27,15 +30,18 @@ class TodosController extends Controller
 
     public function updateById(Request $request)
     {
-        DB::table(self::$tableName)
-            ->where('id', $request->id)
-            ->update($request->toArray());
+        $todo = Todo::find($request->id);
+        foreach ($request->keys() as $key) {
+            $todo->$key = $request->$key;
+        }
+        $todo->save();
         return response('OK');
     }
 
     public function deleteById(Request $request)
     {
-        DB::table(self::$tableName)->where('id', $request->id)->delete();
+        $todo = Todo::find($request->id);
+        $todo->delete();
         return response('OK');
     }
 }
