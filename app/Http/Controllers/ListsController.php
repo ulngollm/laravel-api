@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NoteList;
+use App\Models\TodoList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ListsController extends Controller
 {
-    static string $tableName = 'lists';
 
     public function getAll()
     {
-        $lists = NoteList::all();
+        $lists = TodoList::all();
         return $lists;
     }
 
     public function getOne(Request $request)
     {
-        $list = NoteList::find($request->id);
+        $list = TodoList::find($request->id);
         return $list;
     }
 
@@ -27,9 +26,10 @@ class ListsController extends Controller
         //TODO request validation
         //todo проверить, есть ли уже такой список
         //https://docs.rularavel.com/docs/8.x/eloquent#retrieving-or-creating-models
-        $list = new NoteList();
-        $list->name = $request->name;
-        $list->type = $request->type;
+        $list = new TodoList();
+        foreach ($request->keys() as $key) {
+            $list->$key = $request->$key;
+        }
         $list->save();
 
         return response('OK');
@@ -38,16 +38,17 @@ class ListsController extends Controller
     public function updateById(Request $request)
     {
 
-        $list = NoteList::find($request->id);
-        $list->name = $request->name;
-        $list->type = $request->type;
+        $list = TodoList::find($request->id);
+        foreach ($request->keys() as $key) {
+            $list->$key = $request->$key;
+        }
         $list->save();
         return response('OK');
     }
 
     public function deleteById(Request $request)
     {
-        $list = NoteList::find($request->id);
+        $list = TodoList::find($request->id);
         $list->delete();
         return response('OK');
     }

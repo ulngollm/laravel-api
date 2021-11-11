@@ -17,11 +17,6 @@ use App\Http\Controllers\TestController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
 Route::get('/lists', [ListsController::class, 'getAll']);
 Route::post('/lists', [ListsController::class, 'addOne']);
 Route::get('/lists/{id}', [ListsController::class, 'getOne']);
