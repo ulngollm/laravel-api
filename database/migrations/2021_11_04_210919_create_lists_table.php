@@ -16,7 +16,8 @@ class CreateListsTable extends Migration
         Schema::create('lists', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->enum('type', ['list', 'topic']);
+            $table->enum('type', ['timeline', 'topic'])->default('topic');
+            $table->string('color', 6)->default('ffffff');
         });
     }
 

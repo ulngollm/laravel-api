@@ -13,15 +13,14 @@ class CreateNotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->timestamp('date_completed');
             $table->string('title', 50);
-            $table->string('text');
-            $table->boolean('complete')->default(0);
+            $table->string('desc')->nullable(true);
+            $table->enum('status', ['pending', 'process', 'complete', 'close'])->default('pending');
             $table->tinyInteger('topic', false, true);
-            $table->tinyInteger('list', false, true);
+            $table->tinyInteger('timeline', false, true)->default(1);
         });
     }
 

@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListsController;
-use App\Http\Controllers\NotesController;
+use App\Http\Controllers\TodosController;
 use App\Http\Controllers\TestController;
 
 /*
@@ -29,11 +29,11 @@ Route::put('/lists/{id}', [ListsController::class, 'updateById']);
 Route::delete('/lists/{id}', [ListsController::class, 'deleteById']);
 
 
-Route::get('/notes', [NotesController::class, 'getAll']);
-Route::post('/notes', [NotesController::class, 'addOne']);
-Route::get('/notes/{id}', [NotesController::class, 'getOne']);
-Route::put('/notes/{id}', [NotesController::class, 'updateById']);
-Route::delete('/notes/{id}', [NotesController::class, 'deleteById']);
+Route::get('/todos', [TodosController::class, 'getAll']);
+Route::post('/todos', [TodosController::class, 'addOne']);
+Route::get('/todos/{id}', [TodosController::class, 'getOne']);
+Route::put('/todos/{id}', [TodosController::class, 'updateById']);
+Route::delete('/todos/{id}', [TodosController::class, 'deleteById']);
 
 Route::get('/test', [TestController::class, 'getAll']);
 Route::post('/test', [TestController::class, 'addOne']);

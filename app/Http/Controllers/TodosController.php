@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class NotesController extends Controller
+class TodosController extends Controller
 {
-    static string $tableName = 'notes';
+    static string $tableName = 'todos';
 
     public function getAll()
     {
-        $categories = DB::table(self::$tableName)->get()->toArray();
-        return $categories;
+        return Todo::all();
     }
 
     public function addOne(Request $request)
     {
-        DB::table(self::$tableName)->insert($request->toArray());
+        $todo = new Todo;
+        foreach ($request->keys() as $key) {
+            $todo->$key = $request->$key;
+        }
+        $todo->save();
         return response('OK');
     }
 
