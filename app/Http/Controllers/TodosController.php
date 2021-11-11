@@ -8,9 +8,25 @@ use Illuminate\Http\Request;
 class TodosController extends Controller
 {
 
-    public function getAll()
+    public function getAll(Request $request)
     {
-        return Todo::all();
+        $query = Todo::query();
+        if($request->topic){
+            $query->where('topic', $request->topic);
+        }
+        if($request->timeline){
+            $query->where('timeline', $request->timeline);
+        }
+        if($request->status){
+            $query->where('status', $request->status);
+        }
+        if(isset($request->active)){
+            if($request->active == false){
+                $query->whereIn('status',['complete','close']);
+            }
+            else  $query->whereNotIn('status',['complete','close']);
+        }
+        return $query->get();
     }
 
     public function getOne(Request $request)
