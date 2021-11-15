@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotesTable extends Migration
+class CreateStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateNotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('todos', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('title', 50);
+            $table->string('name', 25);
             $table->string('desc')->nullable(true);
-            $table->enum('status', ['pending', 'process', 'complete', 'close'])->default('pending');
-            $table->tinyInteger('topic', false, true);
-            $table->tinyInteger('timeline', false, true)->default(1);
         });
     }
 
@@ -31,6 +27,6 @@ class CreateNotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('statuses');
     }
 }

@@ -15,8 +15,11 @@ class Todo extends Model
     protected $fillable = [
         'title',
         'desc',
-        'status',
-        'topic',
-        'timeline'
+        'status'
     ];
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id', 'id');
+    }
 }
