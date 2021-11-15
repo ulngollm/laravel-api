@@ -10,4 +10,5 @@ class TodoList extends Model
     use HasFactory;
     protected $table = 'lists';
     public $timestamps = false;
+
 }

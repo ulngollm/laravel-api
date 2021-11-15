@@ -18,6 +18,11 @@ class Todo extends Model
         'status'
     ];
 
+    public function lists()
+    {
+        return $this->belongsToMany(TodoList::class, 'list_todo', 'todo_id', 'list_id');
+    }
+
     public function status()
     {
         return $this->belongsTo(Status::class, 'status_id', 'id');
